@@ -1,8 +1,23 @@
-# Welcome to your Expo app 👋
+# BoulderBuddy
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile app for bouldering enthusiasts to log climbs, track progress, and connect with other climbers.
 
-## Get started
+## Features
+
+- **Log Routes** — Record climbs with gym name, route name, grade (V-scale), notes, and photos
+- **Feed** *(coming soon)* — See posts and activity from other climbers
+- **Nearby Gyms** *(coming soon)* — Discover climbing gyms near you
+- **Profile** *(coming soon)* — View your climbing history and stats
+
+## Tech Stack
+
+- [Expo](https://expo.dev) / React Native
+- TypeScript
+- expo-router (file-based navigation)
+- AsyncStorage (local data persistence)
+- expo-image-picker (camera & photo library)
+
+## Getting Started
 
 1. Install dependencies
 
@@ -16,35 +31,19 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+   Then open in an [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/), [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/), or [Expo Go](https://expo.dev/go).
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Project Structure
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+app/
+  (tabs)/         # Main tab screens
+    index.tsx         # Home
+    routeEntryPage.tsx  # Log a climb
+    feedPage.tsx        # Social feed
+    nearbyGymPage.tsx   # Find gyms
+    ProfilePage.tsx     # User profile
+components/       # Reusable UI components
+constants/        # Theme colors and fonts
+hooks/            # Custom React hooks
+```
