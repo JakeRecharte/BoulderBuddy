@@ -52,6 +52,10 @@ export default function TabLayout() {
         name="settingsPage"
         options={{ href: null }}
       />
+      <Tabs.Screen
+        name="loginPage"
+        options={{ href: null }}
+      />
     </Tabs>
   );
 }

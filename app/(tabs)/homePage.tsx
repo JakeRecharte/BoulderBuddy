@@ -11,6 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { useAuth } from '@/context/auth';
 
 const TABS = ['FEATURED', 'ROUTES', 'GYMS', 'CLIMBERS'];
 
@@ -31,6 +32,7 @@ const TOP_PROBLEMS = [
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState('FEATURED');
   const router = useRouter();
+  const { isLoggedIn } = useAuth();
   return (
     <SafeAreaView style={styles.safe}>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -39,10 +41,10 @@ export default function HomePage() {
         <View style={styles.header}>
           <Text style={styles.appTitle}>Boulder Buddy</Text>
           <View style={styles.headerIcons}>
-            <TouchableOpacity onPress={() => router.push('/(tabs)/profilePage')} style={styles.iconButton}>
+            <TouchableOpacity onPress={() => router.push(isLoggedIn ? '/(tabs)/profilePage' : '/(tabs)/loginPage?redirect=profilePage')} style={styles.iconButton}>
               <IconSymbol name="person.circle.fill" size={28} color="#FFFFFF" />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => router.push('/(tabs)/settingsPage')} style={styles.iconButton}>
+            <TouchableOpacity onPress={() => router.push(isLoggedIn ? '/(tabs)/settingsPage' : '/(tabs)/loginPage?redirect=settingsPage')} style={styles.iconButton}>
               <IconSymbol name="gearshape.fill" size={28} color="#FFFFFF" />
             </TouchableOpacity>
           </View>
