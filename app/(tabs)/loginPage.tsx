@@ -24,12 +24,6 @@ function isValidPassword(password: string): boolean {
     );
 }
 
-const PASSWORD_RULES = [
-    'At least 9 characters',
-    'At least one uppercase letter',
-    'At least one lowercase letter',
-    'At least one number',
-];
 
 const destinations = {
     profilePage: '/(tabs)/profilePage',
@@ -146,14 +140,7 @@ export default function LoginPage() {
                         returnKeyType="done"
                         onSubmitEditing={handleSubmit}
                     />
-                    {passwordError && (
-                        <View style={styles.passwordRules}>
-                            <Text style={styles.errorText}>Invalid password. Requirements:</Text>
-                            {PASSWORD_RULES.map((rule) => (
-                                <Text key={rule} style={styles.ruleText}>· {rule}</Text>
-                            ))}
-                        </View>
-                    )}
+                    {passwordError && <Text style={styles.errorText}>Invalid login credentials</Text>}
                 </View>
 
                 {!!authError && <Text style={styles.authError}>{authError}</Text>}
