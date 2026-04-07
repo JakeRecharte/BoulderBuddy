@@ -1,5 +1,5 @@
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useRef, useState } from 'react';
+import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
+import { useCallback, useRef, useState } from 'react';
 import {
     StyleSheet,
     Text,
@@ -40,6 +40,14 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const passwordRef = useRef<TextInputType>(null);
     const router = useRouter();
+
+    useFocusEffect(useCallback(() => {
+        return () => {
+            setEmail('');
+            setPassword('');
+            resetErrors();
+        };
+    }, []));
     const { redirect } = useLocalSearchParams<{ redirect?: string }>();
 
     function resetErrors() {
