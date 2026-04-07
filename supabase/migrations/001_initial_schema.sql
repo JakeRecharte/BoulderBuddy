@@ -57,5 +57,35 @@ create table route_grade_votes (
   unique(route_id, user_id)
 );
 
+-- User Profiles
+create table profiles (
+  id uuid primary key references auth.users(id) on delete cascade,
+  display_name text,
+  avatar_url text,
+  bio text not null default 'Nothing to see here.',
+  home_gym uuid references gyms(id) on delete set null,
+  scans_used int not null default 0,
+  is_subscribed boolean not null default false,
+  settings jsonb not null default '{}'::jsonb
+);
+
+-- Auto-create profile on signup
+create or replace function create_profile()
+returns trigger as $$
+begin
+  insert into profiles (id) values (NEW.id);
+  return NEW;
+end;
+$$ language plpgsql security definer;
+
+create trigger on_user_created
+  after insert on auth.users
+  for each row execute function create_profile();
+
+-- Routes: add description and visibility
+alter table routes
+  add column description text,
+  add column is_public boolean not null default false;
+
 -- Storage bucket for 3D hold models
 insert into storage.buckets (id, name, public) values ('hold-models', 'hold-models', true);
